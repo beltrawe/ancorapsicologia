@@ -123,36 +123,66 @@
   .nav-cta:hover { transform: translateY(-1px); }
 
   /* ===== HERO ===== */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    position: relative;
-    padding: 150px 0 70px;
-    overflow: hidden;
-  }
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative;
+  padding: 150px 0 70px;
+  overflow: hidden;
+}
 
-  .hero-bg-shape {
-    position: absolute;
-    width: 900px; height: 900px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(46,95,232,0.16) 0%, rgba(110,146,255,0.06) 50%, transparent 75%);
-    top: -280px; right: -260px;
-    animation: float-rotate 14s ease-in-out infinite;
-    will-change: transform;
-  }
-  @keyframes float-rotate {
-    0%,100% { transform: translate(0,0) rotate(0deg); }
-    50% { transform: translate(-40px, 50px) rotate(8deg); }
-  }
+.hero-bg-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg-media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero-bg-media::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    100deg,
+    var(--paper) 0%,
+    var(--paper) 28%,
+    rgba(250,247,242,0.94) 42%,
+    rgba(250,247,242,0.55) 58%,
+    rgba(250,247,242,0.15) 72%,
+    transparent 88%
+  );
+}
 
-  .grid-overlay {
-    position: absolute; inset: 0;
-    background-image: linear-gradient(rgba(11,30,61,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(11,30,61,0.035) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: linear-gradient(to bottom, black, transparent 75%);
-  }
+.hero-bg-shape {
+  position: absolute;
+  width: 900px; height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46,95,232,0.16) 0%, rgba(110,146,255,0.06) 50%, transparent 75%);
+  top: -280px; right: -260px;
+  animation: float-rotate 14s ease-in-out infinite;
+  will-change: transform;
+  z-index: 1;
+}
+@keyframes float-rotate {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(-40px, 50px) rotate(8deg); }
+}
 
-  .hero-inner { position: relative; z-index: 2; max-width: 680px; }
+.grid-overlay {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(11,30,61,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(11,30,61,0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
 
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 9px;
@@ -167,7 +197,7 @@
   .hero-eyebrow .nav-dot { background: var(--blue); }
 
   .hero h1 {
-    font-size: clamp(42px, 6.4vw, 76px);
+    font-size: clamp(38px, 5.4vw, 68px);
     line-height: 1.04;
     font-weight: 700;
     margin-bottom: 30px;
@@ -485,7 +515,21 @@
     .hero-stats { gap: 32px; flex-wrap: wrap; }
     .t-card { width: 300px; }
     .cursor-glow { display: none; }
-  }
+
+    /* ---- HERO EMPILHADO NO MOBILE ---- */
+    .hero-bg-media::after {
+  background: linear-gradient(
+    to bottom,
+    var(--paper) 0%,
+    var(--paper) 38%,
+    rgba(250,247,242,0.9) 55%,
+    rgba(250,247,242,0.4) 75%,
+    transparent 100%
+  );
+}
+.hero-bg-media img {
+  object-position: center 30%;
+}
 </style>
 </head>
 <body>
@@ -498,39 +542,73 @@
     <a href="#contato" class="nav-cta"><span>Agendar consulta</span></a>
   </div>
 </nav>
-
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg-shape" aria-hidden="true"></div>
-  <div class="grid-overlay" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="hero-inner">
-      <h1>Você não precisa<br>carregar isso <span class="accent">sozinho.</span></h1>
-      <p class="hero-sub">Atendimento psicológico humano, sigiloso e sem julgamento — no seu tempo, do jeito que faz sentido para você.</p>
-      <div class="hero-ctas">
-        <a href="#contato" class="btn-primary">
-          Agendar primeira sessão
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="#como-funciona" class="link-quiet">Como funciona →</a>
-      </div>
+
+    <div class="hero-bg-media" aria-hidden="true">
+        <img src="hero.png" alt="">
+    </div>
+    <div class="hero-bg-shape" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <div class="wrap">
+
+        <div class="hero-inner">
+
+            <h1>
+                Você não precisa<br>
+                carregar isso <span class="accent">sozinho.</span>
+            </h1>
+
+            <p class="hero-sub">
+                Atendimento psicológico humano, sigiloso e sem julgamento —
+                no seu tempo, do jeito que faz sentido para você.
+            </p>
+
+            <div class="hero-ctas">
+
+                <a href="#contato" class="btn-primary">
+                    Agendar primeira sessão
+
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8h10M9 4l4 4-4 4"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+
+                </a>
+
+                <a href="#como-funciona" class="link-quiet">
+                    Como funciona →
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-stats">
+
+            <div>
+                <p class="stat-num" data-count="500">0<span>+</span></p>
+                <p class="stat-label">Sessões realizadas</p>
+            </div>
+
+            <div>
+                <p class="stat-num" data-count="98">0<span>%</span></p>
+                <p class="stat-label">Indicariam a clínica</p>
+            </div>
+
+            <div>
+                <p class="stat-num" data-count="24">0<span>h</span></p>
+                <p class="stat-label">Resposta de agendamento</p>
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="hero-stats">
-      <div>
-        <p class="stat-num" data-count="500">0<span>+</span></p>
-        <p class="stat-label">Sessões realizadas</p>
-      </div>
-      <div>
-        <p class="stat-num" data-count="98">0<span>%</span></p>
-        <p class="stat-label">Indicariam a clínica</p>
-      </div>
-      <div>
-        <p class="stat-num" data-count="24">0<span>h</span></p>
-        <p class="stat-label">Resposta de agendamento</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- DOR -->
