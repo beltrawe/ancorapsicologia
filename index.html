@@ -13,15 +13,18 @@
 <style>
 
   :root {
-    --navy: #0B1E3D;
-    --navy-soft: #0B1E3Dcc;
-    --navy-faint: #0B1E3D66;
-    --blue: #2E5FE8;
-    --blue-light: #6E92FF;
-    --paper: #FAF7F2;
-    --ice: #DCE6FB;
-    --line: #0B1E3D14;
-  }
+  --navy: #15233D;
+  --navy-soft: #15233DCC;
+  --navy-faint: #15233D14;
+  
+  --blue: #5F7FBE;
+  --blue-light: #A9BCE8;
+  
+  --paper: #F8F7F4;
+  --ice: #EEF2F8;
+  
+  --line: #15233D12;
+}
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html {
@@ -499,37 +502,50 @@
   .footer-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700; }
   .footer-meta { font-size: 13px; color: var(--navy-faint); }
 
-  /* ===== REVEAL ===== */
-  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-1 { transition-delay: 0.08s; } .reveal-2 { transition-delay: 0.16s; } .reveal-3 { transition-delay: 0.24s; }
-
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
     .wrap { padding: 0 22px; }
     section { padding: 80px 0; }
     .bento { grid-template-columns: 1fr; }
     .bento-card.lg { grid-column: span 1; }
-    .hero { padding: 130px 0 60px; min-height: auto; }
-    .hero-bg-shape { width: 600px; height: 600px; right: -240px; }
     .hero-stats { gap: 32px; flex-wrap: wrap; }
     .t-card { width: 300px; }
     .cursor-glow { display: none; }
 
-    /* ---- HERO EMPILHADO NO MOBILE ---- */
+    .hero {
+      aspect-ratio: 1080 / 1920;
+      height: auto;
+      min-height: 0;
+      padding: 130px 0 60px;
+    }
+
+    .hero-bg-shape { width: 600px; height: 600px; right: -240px; }
+
     .hero-bg-media::after {
-  background: linear-gradient(
-    to bottom,
-    var(--paper) 0%,
-    var(--paper) 38%,
-    rgba(250,247,242,0.9) 55%,
-    rgba(250,247,242,0.4) 75%,
-    transparent 100%
-  );
-}
-.hero-bg-media img {
-  object-position: center 30%;
-}
+      background: linear-gradient(
+        to bottom,
+        var(--paper) 0%,
+        rgba(250,247,242,0.85) 32%,
+        rgba(250,247,242,0.45) 55%,
+        transparent 78%
+      );
+    }
+
+    .hero-stats .stat-num {
+      color: #fff;
+      text-shadow: 0 0 12px rgba(46,95,232,0.9), 0 0 28px rgba(46,95,232,0.6), 0 2px 6px rgba(0,0,0,0.35);
+    }
+
+    .hero-stats .stat-label {
+      color: #fff;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+ 
+    }
+    .hero-bg-media img {
+      opacity: 0.60;
+    }
+
+  }
 </style>
 </head>
 <body>
@@ -546,7 +562,10 @@
 <section class="hero">
 
     <div class="hero-bg-media" aria-hidden="true">
-        <img src="hero.png" alt="">
+        <picture>
+            <source media="(min-width: 901px)" srcset="hero.png">
+            <img src="hero-mobile.png" alt="">
+        </picture>
     </div>
     <div class="hero-bg-shape" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
@@ -581,7 +600,7 @@
                 </a>
 
                 <a href="#como-funciona" class="link-quiet">
-                    Como funciona →
+                  
                 </a>
 
             </div>
